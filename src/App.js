@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Switch } from "react-router-dom";
+import Proptypes  from "prop-types";
+import Dasboard from '../src/components/pages/dashboardPage'
+import DetailPage from '../src/components/pages/detailPage'
+import StatePage from '../src/components/pages/statePage'
+import "semantic-ui-css/semantic.min.css"
+const App = ({location}) => (
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="ui container">
+      <Switch>
+        <Route location={location} path="/detail" exact component={DetailPage}/>
+        <Route location={location} path="/" exact component={Dasboard}/>
+        <Route location={location} path="/state" exact component={StatePage}/>
+      </Switch>
       </div>
-    );
-  }
+);
+App.prototype = {
+  location : Proptypes.shape({
+    pathname: Proptypes.string.isRequired
+  }).isRequired
 }
 
 export default App;
